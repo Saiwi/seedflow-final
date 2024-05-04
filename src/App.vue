@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
+import { getDocs, collection } from 'firebase/firestore'
+
+const getData = async function() {
+    const querySnapshot = await getDocs(collection(window.db, "users"));
+    querySnapshot.forEach((doc) => {
+        const { name } = doc.data();
+        console.log(`${doc.id} => ${name}`);
+    });
+};
 </script>
 
 <template>
     <header>
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+        <img @click="getData" alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
