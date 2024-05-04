@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue';
-</script>
-
 <template>
-    <main>
-        <TheWelcome />
-    </main>
+    <input type="text" v-model="value">
 </template>
