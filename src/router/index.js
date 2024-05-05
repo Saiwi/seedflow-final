@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AuthLayout from "@/layouts/AuthLayout.vue";
-import DefaultLayout from "@/layouts/DefaultLayout.vue";
+// import DefaultLayout from "@/layouts/DefaultLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    
     {
       path: "/",
       component: AuthLayout,
