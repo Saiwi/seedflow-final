@@ -5,17 +5,7 @@ import DefaultLayout from "@/layouts/DefaultLayout.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: "/",
-      component: DefaultLayout,
-      children: [
-        {
-          path: "/",
-          name: "home",
-          component: import("@/views/MainPage.vue"),
-        },
-      ],
-    },
+    
     {
       path: "/",
       component: AuthLayout,
