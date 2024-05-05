@@ -30,7 +30,9 @@
     </div>
 
     <div class="go-to-login">
-      <RouterLink to="/register"> Немає акаунту? Зареєструйтесь </RouterLink>
+      <RouterLink to="/auth/register">
+        Немає акаунту? Зареєструйтесь
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -143,15 +145,18 @@ export default {
 <style lang="scss">
 .go-to-login {
   margin-top: 8px;
+
   a {
     text-decoration: none;
     opacity: 0.5;
     transition: opacity 0.5s;
     color: black;
+
     &:hover {
       opacity: 1;
       transition: opacity 0.5s;
     }
+
     font-size: 12px;
   }
 }
@@ -163,11 +168,13 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 50px;
+
   @media (max-width: 600px) {
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
   }
+
   .input-wrapper {
     width: 100%;
     display: flex;
@@ -175,51 +182,62 @@ export default {
     width: 100%;
     flex-grow: 1;
   }
+
   .input-error {
     color: rgb(199, 31, 31);
     display: inline;
+
     &:not(:empty) {
       margin-top: 8px;
     }
   }
+
   .form {
     display: flex;
     width: 100%;
     flex-direction: column;
     margin-top: 18px;
     gap: 8px;
+
     .row {
       display: flex;
       gap: 8px;
+
       @media (max-width: 600px) {
         flex-direction: column;
       }
     }
   }
+
   @keyframes border-b-rot {
     from {
       bottom: -3px;
       left: 0%;
     }
+
     to {
       left: -100%;
       bottom: -3px;
     }
   }
+
   @keyframes border-t-rot {
     from {
       top: -3px;
       left: -100%;
     }
+
     to {
       left: 100%;
       top: -3px;
     }
   }
+
   .button-wrapper {
     overflow: hidden;
     width: 100%;
   }
+
   button {
     position: relative;
     margin-top: 20px;
@@ -229,9 +247,11 @@ export default {
     padding: 14px 0;
     transition: filter 0.5s;
     z-index: 0;
+
     &:disabled {
       opacity: 0.7;
     }
+
     &:after {
       content: "";
       display: flex;
@@ -242,6 +262,7 @@ export default {
       background-color: #e9d591;
       z-index: 10;
     }
+
     &:before {
       content: "";
       display: flex;
@@ -252,12 +273,15 @@ export default {
       background-color: #e9d591;
       z-index: 10;
     }
+
     &:hover {
       transition: filter 0.5s;
       filter: saturate(1.5);
+
       &::after {
         animation: border-b-rot 0.5s forwards;
       }
+
       &::before {
         animation: border-t-rot 0.5s forwards;
       }

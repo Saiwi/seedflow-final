@@ -16,13 +16,13 @@
     <div class="d-flex flex-column gap-8 mt-34">
       <button
         v-if="!userExists"
-        @click="router.push('/login')"
+        @click="router.push('/auth/login')"
         class="auth_button login_button"
       >
         Увійти
       </button>
       <button
-        @click="router.push('/register')"
+        @click="router.push('/auth/register')"
         class="auth_button register_button"
       >
         Реєстрація
