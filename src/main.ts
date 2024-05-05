@@ -8,6 +8,11 @@ import router from './router';
 
 import firebase from './firebase';
 
+declare global {
+    interface Window {
+        db: any;
+    }
+}
 window.db = firebase.firestore;
 
 const app = createApp(App);

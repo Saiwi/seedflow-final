@@ -12,7 +12,7 @@ const router = createRouter({
                 {
                     path: '/',
                     name: 'home',
-                    component: import('../views/MainPage.vue'),
+                    component: import('@/views/MainPage.vue'),
                 },
             ],
         },
@@ -23,17 +23,17 @@ const router = createRouter({
                 {
                     path: '/auth',
                     name: 'auth',
-                    component: () => import('../views/AuthView.vue'),
+                    component: () => import('@/views/AuthView.vue'),
                 },
                 {
                     path: '/register',
                     name: 'register',
-                    component: () => import('../views/RegisterView.vue'),
+                    component: () => import('@/views/RegisterView.vue'),
                 },
                 {
                     path: '/login',
                     name: 'login',
-                    component: () => import('../views/LoginView.vue'),
+                    component: () => import('@/views/LoginView.vue'),
                 },
             ],
         },
@@ -44,7 +44,7 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    component: () => import('../views/NotFound.vue'),
+                    component: () => import('@/views/NotFound.vue'),
                 },
             ],
         },
