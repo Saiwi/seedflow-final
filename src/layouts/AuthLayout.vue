@@ -1,7 +1,9 @@
 <template>
   <div class="auth-layout">
     <div class="auth-layout__content">
+      zxczxczxczxc
       <RouterView></RouterView>
+      adsadsadsads
     </div>
   </div>
 </template>
