@@ -6,6 +6,7 @@
 }
 
 body {
+    font-family: 'URegular';
     margin: 0;
     min-height: 100vh;
     transition:
@@ -15,4 +16,18 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+    font-family: 'URegular';
+    font-size: 14px;
+    color: black;
+    outline: none;
+    border: 2px solid black;
+    padding: 12px 14px;
+}
+
+button {
+    font-family: 'URegular';
+    cursor: pointer;
 }

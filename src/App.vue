@@ -1,6 +1,11 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import { getDocs, collection } from 'firebase/firestore'
+<script lang="ts">
+import { RouterView } from 'vue-router';
+
+export default {
+    components: {
+        RouterView,
+    },
+};
 </script>
 
 <template>

@@ -16,9 +16,11 @@
   "dependencies": {
     "firebase": "^10.11.1",
     "format": "^0.2.2",
+    "inputmask": "^5.0.8",
     "npm": "^10.7.0",
     "pinia": "^2.1.7",
     "run": "^1.5.0",
+    "validator": "^13.11.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
@@ -39,6 +41,8 @@
     "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.2.5",
+    "sass": "^1.76.0",
+    "sass-loader": "^14.2.1",
     "typescript": "~5.4.0",
     "vite": "^5.2.8",
     "vite-plugin-vue-devtools": "^7.0.25",

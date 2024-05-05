@@ -6,14 +6,9 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 
-import firestore from "./firebase";
-import { Firestore } from "@firebase/firestore";
-declare global {
-    interface Window {
-        db: Firestore,
-    }
-}
-window.db = firestore;
+import firebase from './firebase';
+
+window.db = firebase.firestore;
 
 const app = createApp(App);
 
