@@ -127,12 +127,12 @@
             background-color: #d9d9d9;
         }
         .cart {
-            border: 2px solid black;
-            padding: 6px 12px;
-            cursor: pointer;
             @media (max-width: 500px) {
                 flex-grow: 1;
             }
+            border: 2px solid black;
+            padding: 6px 12px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 16px;
