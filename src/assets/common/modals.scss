@@ -1,0 +1,21 @@
+.modal-head {
+    cursor: all-scroll;
+    flex-grow: 1;
+    padding: 8px;
+    text-align: end;
+    i {
+        cursor: pointer;
+    }
+}
+
+.modal-content {
+    padding: 8px;
+}
+
+.common-modal {
+    border: 2px solid black !important;
+    box-shadow: -1px 1px 7px 3px #00000047;
+    .handle {
+        display: none !important;
+    }
+}

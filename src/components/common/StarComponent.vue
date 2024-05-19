@@ -1,0 +1,27 @@
+<script setup>
+</script>
+
+<template>
+    <svg
+        width="36"
+        height="36"
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            stroke="2"
+            d="M18 27.39L7.42049 33.312L9.78299 21.42L0.880493 13.188L12.921 11.76L18 0.75L23.079 11.76L35.1195 13.188L26.217 21.42L28.5795 33.312L18 27.39Z"
+        />
+    </svg>
+</template>
+
+<style scoped>
+svg {
+    margin: 0 4px !important;
+}
+path {
+    stroke: black;
+    stroke-width: 2px;
+}
+</style>

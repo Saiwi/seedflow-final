@@ -5,7 +5,28 @@
     font-weight: normal;
 }
 
+*::-webkit-scrollbar {
+    width: 12px;
+}
+*::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 4px;
+}
+*::-webkit-scrollbar-track {
+    background: grey;
+    width: 5px;
+}
+*::-webkit-scrollbar-track-piece {
+    width: 2px;
+}
+*::-webkit-scrollbar-corner {
+    background-color: red;
+}
+
 body {
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: column;
     font-family: 'URegular';
     margin: 0;
     min-height: 100vh;
@@ -16,6 +37,13 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 input {
@@ -30,4 +58,8 @@ input {
 button {
     font-family: 'URegular';
     cursor: pointer;
+}
+
+i {
+    font-size: 24px;
 }

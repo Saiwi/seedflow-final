@@ -1,0 +1,107 @@
+h1 {
+    font-size: 40px;
+    font-weight: normal;
+    margin: 0;
+    border-bottom: 2px solid black;
+    padding-bottom: 12px;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.main-page {
+    margin-top: 100px;
+}
+
+.description-row {
+    display: grid;
+    padding-top: 40px;
+    margin-bottom: 140px;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 100px;
+    border-right: 2px solid black;
+
+    .column-first {
+        display: flex;
+        flex-direction: column;
+
+        .bottom-part {
+            margin-top: 200px;
+
+            .minimum-sum {
+                margin-bottom: 20px;
+            }
+
+            button.to-catalog {
+                outline: none;
+                border: 2px solid black;
+                background-color: transparent;
+                padding: 4px 12px;
+
+                display: flex;
+                align-items: center;
+                column-gap: 60px;
+
+                i {
+                    font-size: 24px;
+                }
+
+                transition:
+                    color 0.3s,
+                    background-color 0.3s;
+                &:hover {
+                    color: white;
+                    background-color: black;
+                    transition:
+                        color 0.3s,
+                        background-color 0.3s;
+                }
+            }
+        }
+    }
+
+    .main-image {
+        width: 668px;
+        height: 304px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 1440px) {
+    .main-page {
+        margin-top: 16px;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    .description-row {
+        display: flex;
+        flex-direction: column;
+        border-right: none;
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+        margin-bottom: 40px;
+        .column-first .bottom-part {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+    }
+    .main-image {
+        width: 100% !important;
+        height: 100% !important;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: 668px;
+        }
+    }
+    .column-second > div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}

@@ -1,0 +1,87 @@
+<template>
+    <div class="price-selector-wrapper">
+        <button class="decrease" @click="decrease">-</button>
+        <input type="number" min="1" class="value" :value="inputValue" @input="onInput">
+        <button class="increase" @click="increase">+</button>
+    </div>
+</template>
+<script lang="js" setup>
+import { defineModel, ref } from 'vue';
+
+const value = defineModel({ 
+    default: 1,
+});
+
+const inputValue = ref(1);
+const onInput = (event) => {
+    if (event.target.value <= 1) {
+        event.target.value = 1;
+        inputValue.value = 1;
+        return false;
+    }
+    inputValue.value = event.target.value;
+};
+const increase = () => {
+    inputValue.value++;
+};
+const decrease = () => {
+    if (inputValue.value <= 1) {
+        return false;
+    }
+    inputValue.value--;
+};
+</script>
+
+<style lang="scss" scoped>
+.price-selector-wrapper {
+    border: #D9D9D9 2px solid;
+    font-size: 14px;
+    color: black;
+    max-width: 138px;
+
+    display: flex;
+    justify-content: center;
+
+    button {
+        outline: none;
+        background-color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .decrease {
+        border-right: 2px solid #D9D9D9;
+        padding: 6px 16px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .value {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .increase {
+        border-left: 2px solid #D9D9D9;
+        padding: 6px 16px;
+    }
+}
+</style>
