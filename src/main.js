@@ -1,5 +1,5 @@
 import 'remixicon/fonts/remixicon.css'
-import "./assets/main.css";
+import "./assets/main.scss";
 import "vue-draggable-resizable/style.css";
 
 import 'select2/dist/css/select2.min.css';
