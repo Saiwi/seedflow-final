@@ -16,8 +16,7 @@ const profileName = ref("");
 const allowToWriteComment = ref(null);
 
 const currentUserComment = computed(() => commentsStore.myComment);
-const comments = computed(() => commentsStore.myComment);
-const commentWasSentByThisUser = ref(false);
+const comments = computed(() => commentsStore.comments);
 
 const disableCommentButton = ref(false);
 const commentError = ref("");
