@@ -91,7 +91,9 @@ export default {
         });
 
         const signOutHandle = () => {
-            signOut(auth);
+            signOut(auth).then(() => {
+                router.push("/auth/login");
+            });
         };
 
         return {

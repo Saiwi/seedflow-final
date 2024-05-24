@@ -50,7 +50,9 @@ onAuthStateChanged(auth, function (user) {
 const logout = () => {
     const sure = confirm("Ви дійсно хочете вийти з облікового запису?");
     if (sure) {
-        signOut(auth);
+        signOut(auth).then(() => {
+            router.push("/auth/login");
+        });
     }
 };
 </script>
