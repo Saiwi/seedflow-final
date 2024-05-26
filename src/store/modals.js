@@ -7,13 +7,35 @@ export const useModals = defineStore('modals', {
             x: 0,
             y: 0,
         },
+        preOrderText: {
+            active: false,
+            x: 0,
+            y: 0,
+        },
         cart: {
+            active: false,
+            x: 0,
+            y: 0,
+        },
+        orderForm: {
             active: false,
             x: 0,
             y: 0,
         },
     }),
     getters: {
+        orderFormActive() {
+            return this.orderForm.active;
+        },
+        orderFormCoords() {
+            return { x: this.orderForm.x, y: this.orderForm.y };
+        },
+        preOrderTextActive() {
+            return this.preOrderText.active;
+        },
+        preOrderTextCoords() {
+            return { x: this.preOrderText.x, y: this.preOrderText.y };
+        },
         myOrdersActive() {
             return this.myOrders.active;
         },

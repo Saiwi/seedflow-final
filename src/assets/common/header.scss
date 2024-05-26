@@ -125,6 +125,7 @@
             width: 100%;
             height: 100%;
             background-color: #d9d9d9;
+            min-width: 270px;
         }
         .cart {
             @media (max-width: 500px) {
@@ -156,7 +157,7 @@
             display: flex;
             flex-direction: column;
             background-color: black;
-            row-gap: 2px;
+            row-gap: 1px;
             width: 185px;
 
             a {
@@ -199,11 +200,19 @@
 .search-wrapper {
     position: relative;
     display: flex;
+    input:focus + .search-dropdown,
+    .search-dropdown:focus-within {
+        pointer-events: all;
+        opacity: 1;
+    }
     .search-dropdown {
+        pointer-events: none;
+        opacity: 0;
+
         position: absolute;
         top: 100%;
         left: 0;
-        box-shadow: 1px 1px 6px 3px #04040429;
+        box-shadow: 1px 1px 6px 3px rgba(4, 4, 4, 0.064);
 
         display: flex;
         flex-direction: column;
