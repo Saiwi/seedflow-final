@@ -58,6 +58,8 @@ input {
 button {
     font-family: 'URegular';
     cursor: pointer;
+    color: black;
+    border-radius: 0;
 }
 
 i {
