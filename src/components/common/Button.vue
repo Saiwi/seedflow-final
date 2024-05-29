@@ -1,9 +1,13 @@
 <script setup>
-import { defineProps, defineEmits, reactive } from 'vue';
+import { defineProps, defineEmits, reactive } from "vue";
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(["click"]);
 const props = defineProps({
     border: {
+        type: Boolean,
+        default: false,
+    },
+    isGray: {
         type: Boolean,
         default: false,
     },
@@ -11,18 +15,18 @@ const props = defineProps({
 });
 
 const onClick = () => {
-    emit('click');
+    emit("click");
 };
 
 const classes = reactive({
-    'button-wrapper': true,
-    'no-border': !props.border,
+    "button-wrapper": true,
+    "no-border": !props.border,
 });
 </script>
 
 <template>
     <div :class="classes">
-        <button @click="onClick">
+        <button @click="onClick" :class="`${isGray ? 'bg-gray' : ''}`">
             <slot></slot>
         </button>
     </div>
@@ -45,6 +49,17 @@ const classes = reactive({
     padding: 12px 0;
     transition: filter 0.5s;
     z-index: 0;
+
+    &.bg-gray {
+        background: #d9d9d9;
+        &:after {
+            background-color: #d9d9d9 !important;
+        }
+        &:before {
+            content: "";
+            background-color: #d9d9d9 !important;
+        }
+    }
 
     &:disabled {
         opacity: 0.7;
@@ -77,11 +92,11 @@ const classes = reactive({
         filter: saturate(1.5);
 
         &::after {
-        animation: border-b-rot 0.5s forwards;
+            animation: border-b-rot 0.5s forwards;
         }
 
         &::before {
-        animation: border-t-rot 0.5s forwards;
+            animation: border-t-rot 0.5s forwards;
         }
     }
 }

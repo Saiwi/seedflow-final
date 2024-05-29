@@ -18,6 +18,13 @@ import router from "./router";
 import firebase from "./firebase";
 
 window.db = firebase.firestore;
+window.storage = firebase.storage;
+window.f = function (amount) {
+    if (!amount) {
+        return amount;
+    }
+    return amount.toLocaleString('uk-UA', { style: 'currency', currency: 'UAH' });
+};
 
 const app = createApp(App);
 

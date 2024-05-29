@@ -8,7 +8,11 @@ import { useCatalogs } from "@/composables/use-catalogs";
 const categories = useCategories();
 const catalogs = useCatalogs();
 
+const seedsCatalog = useViewProduct({ catalogId: "1" });
+const ferdsCatalog = useViewProduct({ catalogId: "2" });
+
 import { ref } from "vue";
+import useViewProduct from "@/composables/common/view-product";
 
 const foundResult = ref([]);
 const processing = ref(false);
@@ -22,6 +26,19 @@ const onInput = async () => {
         await ProductsService.searchProductsByNameAndDescription(model.value);
 
     processing.value = false;
+};
+
+const openFoundProduct = (product) => {
+    const category = categories.categories.value.find(
+        ({ id }) => product.category === id
+    );
+    const catalog = category?.catalogId;
+    if (catalog === "1") {
+        seedsCatalog.openProductView(product.id);
+    }
+    if (catalog === "2") {
+        ferdsCatalog.openProductView(product.id);
+    }
 };
 </script>
 
@@ -46,7 +63,10 @@ const onInput = async () => {
                     href="javascript:void(0)"
                     :key="index"
                 >
-                    <div class="search-result-item">
+                    <div
+                        class="search-result-item"
+                        @click="openFoundProduct(product)"
+                    >
                         <div>
                             <b>{{ product.name }}</b>
                         </div>

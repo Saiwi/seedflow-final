@@ -1,6 +1,26 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
 
 export default class ProductsService {
+    static async fetch() {
+        let productsRef = collection(window.db, 'products');
+        const querySnapshot = await getDocs(productsRef);
+        const products = [];
+
+        for (const doc of querySnapshot.docs) {
+            const product = doc.data();
+            product.id = doc.id;
+
+            if (product.image) {
+                const imageRef = ref(window.storage, product.image);
+                product.image = await getDownloadURL(imageRef);
+            }
+
+            products.push(product);
+        }
+
+        return products;
+    }
     static async searchProductsByNameAndDescription(searchString) {
         const productsRef = collection(window.db, 'products');
         // Запит для пошуку в полі 'name'

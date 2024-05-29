@@ -40,7 +40,14 @@
             </div>
         </div>
 
-        <CatalogList id="seed" main-title="Каталог насіння" />
+        <CatalogList
+            :id="1"
+            main-title="Каталог насіння"
+            :products="productsList"
+            :categories="seedsCategories"
+            :filters="seedFilters"
+            :loading="productsLoading"
+        />
 
         <Slider
             title="Овочева галерея"
@@ -53,19 +60,30 @@
             ]"
         />
 
-        <CatalogList id="plants" main-title="Також можете переглянути" />
+        <CatalogList
+            :id="2"
+            :main-title="catalogsList[1]?.title"
+            :categories="fertsCategories"
+            :filters="fertFilters"
+            :products="productsList"
+            :loading="productsLoading"
+        />
 
         <Communications></Communications>
     </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import CatalogList from "@/components/CatalogList";
 import Slider from "@/components/slider/Slider.vue";
 import Communications from "@/components/Communications.vue";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import useViewProduct from "@/composables/common/view-product";
+import { useCatalogs } from "@/composables/use-catalogs";
+import { useCategories } from "@/composables/use-categories";
+import { useFilters } from "@/composables/use-filters";
+import { useProductsStore } from "@/store/products";
 
 export default {
     components: {
@@ -74,13 +92,45 @@ export default {
         Slider,
     },
     setup() {
-        const productsView = useViewProduct({ catalogId: "seed" });
         const name = ref("");
 
+        const products = useProductsStore();
+        products.loadProducts();
+
+        // Filters
+        const seedFilters = useFilters({ catalogId: "1" });
+        const fertFilters = useFilters({ catalogId: "2" });
+
+        seedFilters.fetch();
+
+        // Product view
+        const seedsProductView = useViewProduct({ catalogId: "1" });
+        const fertsProductView = useViewProduct({ catalogId: "2" });
+
+        // Catalogs list
+        const catalogs = useCatalogs();
+        const catalogsList = computed(() => catalogs.catalogs.value);
+
+        // Categories
+        const categories = useCategories();
+        const categoriesList = computed(() => categories.categories);
+
+        const seedsCategories = computed(() =>
+            categoriesList.value.value.filter(
+                (category) => category.catalogId === "1"
+            )
+        );
+        const fertsCategories = computed(() =>
+            categoriesList.value.value.filter(
+                (category) => category.catalogId === "2"
+            )
+        );
+
         const scrollToCatalog = () => {
-            productsView.scrollToProductView();
+            seedsProductView.scrollToProductView();
         };
 
+        // Auth
         const auth = getAuth();
         onAuthStateChanged(auth, function (user) {
             if (user) {
@@ -96,10 +146,26 @@ export default {
             });
         };
 
+        const productsList = computed(() => products.products);
+        const productsLoading = computed(() => products.loading);
+
         return {
+            productsList,
+            productsLoading,
+
+            fertsCategories,
+            seedsCategories,
+
+            seedFilters: seedFilters.filters,
+            fertFilters: fertFilters.filters,
+
+            seedsProductView,
+            fertsProductView,
             name,
+            catalogsList,
             signOutHandle,
             scrollToCatalog,
+            f: window.f,
         };
     },
 };
