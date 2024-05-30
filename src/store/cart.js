@@ -1,13 +1,25 @@
 import { defineStore } from 'pinia'
 
 export const useCart = defineStore('cart', {
-    state: () => ({ count: 0 }),
+    state: () => ({
+        items: [],
+    }),
     getters: {
-        coutForHeader: (state) => state.count,
+        coutForHeader: (state) => state.items.length,
     },
     actions: {
-        increase() {
-            this.count++;
+        clearCart() {
+            this.items = [];
         },
+        addToCart(data) {
+            this.items.push(data);
+        },
+        removeFromCart(id) {
+            this.items = this.items.filter(item => item.id !== id);
+        }
+    },
+    persist: {
+        storage: localStorage,
+        paths: ['items'],
     },
 });

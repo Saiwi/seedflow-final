@@ -1,18 +1,25 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 import PriceSelector from "@/components/common/PriceSelector.vue";
 import Button from "@/components/common/Button.vue";
+import { useCart } from "@/store/cart";
 
-defineProps({
+const props = defineProps({
     product: Object,
     opened: Boolean,
     loading: Boolean,
 });
 defineEmits(["back"]);
 
+const cartStore = useCart();
+
 const count = ref(1);
 const f = window.f;
+
+const isInCart = computed(
+    () => !!cartStore.items.find((item) => item.id == props.product.id)
+);
 </script>
 
 <template>
@@ -23,7 +30,7 @@ const f = window.f;
             </div>
             <main>
                 <div class="image">
-                    <img :src="product.image" alt="Image product" />
+                    <img :src="product.image" />
                 </div>
                 <div class="information">
                     <div class="d-flex flex-column">
@@ -40,9 +47,21 @@ const f = window.f;
                             <div class="price">
                                 {{ f(product.price) }} / пачка
                             </div>
-                            <PriceSelector v-model="count"></PriceSelector>
-                            <Button :disabled="!product.status"
-                                >Додати в корзину</Button
+                            <PriceSelector
+                                :disabled="isInCart"
+                                v-model="count"
+                            ></PriceSelector>
+                            <Button
+                                @click="$emit('add-to-cart', product)"
+                                :disabled="product.status"
+                                v-if="!isInCart && product.status"
+                                >Додати в корзину</Button
+                            >
+                            <Button
+                                v-if="isInCart"
+                                :is-gray="true"
+                                @click="$emit('remove-from-cart', product)"
+                                >Додано</Button
                             >
 
                             <div class="description">

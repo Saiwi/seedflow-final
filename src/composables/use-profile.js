@@ -1,14 +1,18 @@
 import { computed } from 'vue';
 import { useProfileStore } from '@/store/profile';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { useMyOrdersStore } from '@/store/my-orders';
 
 export function useProfile() {
     const auth = getAuth();
     const profileStore = useProfileStore();
 
-    onAuthStateChanged(auth, (user) => {
+    const orders = useMyOrdersStore();
+
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
-            profileStore.loadProfile(user.uid);
+            const profileId = await profileStore.loadProfile(user.uid);
+            orders.fetchOrders(profileId);
         }
     });
 

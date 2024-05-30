@@ -1,7 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { useMyOrdersStore } from "@/store/my-orders";
+import { computed } from "vue";
 
-const ordersList = ref([1]);
+const parseDate = (date) => {
+    return date
+        .toLocaleDateString("uk-UA", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        })
+        .slice(0, -3);
+};
+const f = window.f;
+
+const myOrders = useMyOrdersStore();
+const ordersList = computed(() => myOrders.orders);
 </script>
 
 <template>
@@ -14,59 +27,44 @@ const ordersList = ref([1]);
             <div v-if="!ordersList.length" class="order-item empty">
                 Немає замовлень
             </div>
-            <div class="order-item">
+            <div class="order-item" v-for="order in ordersList" :key="order.id">
                 <table
                     cellpadding="8"
                     border="2"
                     style="border-collapse: collapse"
                 >
                     <tr>
-                        <td>255 грн</td>
-                        <td>24 травня 2024</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Нова почта, 22</td>
+                        <td>{{ f(order.total) }}</td>
+                        <td>{{ parseDate(order.orderDate.toDate()) }}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <b>Товари:</b>
-                            <ul
-                                style="
-                                    list-style: none;
-                                    padding: 10px;
-                                    margin: 0;
-                                "
-                            >
-                                <li>Насіння (1x, 2грн)</li>
-                            </ul>
+                            {{
+                                order.post === "ukr"
+                                    ? "Укр пошта"
+                                    : "Нова пошта"
+                            }}, {{ order.department }}
                         </td>
                     </tr>
-                </table>
-            </div>
-            <div class="order-item">
-                <table
-                    cellpadding="8"
-                    border="2"
-                    style="border-collapse: collapse"
-                >
-                    <tr>
-                        <td>255 грн</td>
-                        <td>24 травня 2024</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Нова почта, 22</td>
-                    </tr>
                     <tr>
                         <td colspan="2">
+                            <b>Статус: </b
+                            >{{ order.complete ? "Виконано" : "В процесі"
+                            }}<br /><br />
                             <b>Товари:</b>
                             <ul
+                                v-if="order.items.length"
                                 style="
                                     list-style: none;
                                     padding: 10px;
                                     margin: 0;
                                 "
                             >
-                                <li>Насіння (1x, 2грн)</li>
+                                <li v-for="item in order.items" :key="item.id">
+                                    {{ item.product.name }} ({{
+                                        item.quantity
+                                    }}x, {{ f(item.product.price) }})
+                                </li>
                             </ul>
                         </td>
                     </tr>

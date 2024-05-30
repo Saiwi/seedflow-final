@@ -36,14 +36,17 @@
                     :opened="openedState"
                     :product="currentData"
                     @back="closeProductView"
+                    @add-to-cart="onAddToCart"
+                    @remove-from-cart="onRemoveFromCart"
                 ></ProductView>
 
                 <ProductCell
-                    v-for="product of props.products"
+                    v-for="product of filteredProducts"
                     :key="product.id"
                     :product="product"
-                    :is-in-cart="false"
                     @view-product="openProductView($event)"
+                    @add-to-cart="onAddToCart"
+                    @remove-from-cart="onRemoveFromCart"
                 ></ProductCell>
 
                 <div class="more-divider"></div>
@@ -52,9 +55,10 @@
         <div class="products more"></div>
         <div class="d-flex justify-content-end w-100 mt-28">
             <ButtonOutline
-                v-if="!loading"
+                v-if="!loading && !pagination.isAll"
                 text="Переглянути більше"
                 icon="arrow-right-up-line"
+                @click="pagination.showMore"
             ></ButtonOutline>
         </div>
     </div>
@@ -67,9 +71,23 @@ import ProductCell from "./ProductCell.vue";
 import ProductView from "./ProductView.vue";
 import Select from "@/components/common/Select.vue";
 import useViewProduct from "@/composables/common/view-product";
-import { ref, computed, watch, reactive, onMounted, nextTick } from "vue";
+import {
+    ref,
+    computed,
+    watch,
+    reactive,
+    onMounted,
+    nextTick,
+    watchEffect,
+} from "vue";
 
 import { defineProps } from "vue";
+import { useCatalogs } from "@/composables/use-catalogs";
+import { useProductsPagination } from "@/composables/common/use-products-pagination";
+import { useCart } from "@/store/cart";
+
+const catalogs = useCatalogs();
+const cartStore = useCart();
 
 const props = defineProps({
     mainTitle: String,
@@ -105,10 +123,70 @@ const sort = ref("by_popularity");
 
 const filterValues = reactive({});
 
+const filteredProducts = computed(() => {
+    // Фільтрування продуктів
+    let filtered = props.products.filter((product) => {
+        // Перевірка на каталог
+        const categoryProduct = props.categories.find(
+            (cat) => cat.id == product.category
+        );
+        if (!categoryProduct) {
+            return false;
+        }
+        const catalogProduct = catalogs.catalogs.value.find(
+            (cat) => categoryProduct.catalogId == cat.id
+        );
+        if (String(catalogProduct.id) !== String(props.id)) {
+            return false;
+        }
+        // Перевірка на категорію
+        if (product.category != category.value) {
+            return false;
+        }
+
+        // Перевірка на фільтри
+        for (let f of product.filters) {
+            if (filterValues[f.filterId] != f.value) {
+                return false;
+            }
+        }
+
+        return true;
+    });
+
+    // Сортування продуктів
+    if (sort.value) {
+        if (sort.value === "by_popularity") {
+        } else if (sort.value === "lower_price") {
+            filtered = filtered.sort((a, b) => a.price - b.price);
+        } else if (sort.value === "bigger_price") {
+            filtered = filtered.sort((a, b) => b.price - a.price);
+        }
+    }
+
+    return filtered;
+});
+
+const pagination = useProductsPagination(filteredProducts.value);
+const paginatedProducts = computed(() => pagination.paginatedProducts);
+
+watchEffect(() => {
+    for (let filter of props.filters) {
+        filterValues[filter.id] = 0;
+    }
+});
+
 watch(categoriesOptions, (newCategories) => {
     if (Object.keys(newCategories).length) {
         const newValue = Object.keys(newCategories)[0];
         category.value = newValue;
     }
 });
+
+const onAddToCart = (product) => {
+    cartStore.addToCart(product);
+};
+const onRemoveFromCart = (productId) => {
+    cartStore.removeFromCart(productId);
+};
 </script>

@@ -5,6 +5,6 @@ export default class ProfileService {
         const ref = collection(window.db, 'profiles');
         const pq = query(ref, where('userId', '==', uid));
         const snap = await getDocs(pq);
-        return snap.docs[0].data();
+        return { ...snap.docs[0].data(), id: snap.docs[0].id };
     }
 }

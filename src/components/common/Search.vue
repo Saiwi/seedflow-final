@@ -33,11 +33,9 @@ const openFoundProduct = (product) => {
         ({ id }) => product.category === id
     );
     const catalog = category?.catalogId;
-    if (catalog === "1") {
-        seedsCatalog.openProductView(product.id);
-    }
-    if (catalog === "2") {
-        ferdsCatalog.openProductView(product.id);
+    const go = window.catalogsGlobal[catalog];
+    if (go) {
+        go(product.id);
     }
 };
 </script>

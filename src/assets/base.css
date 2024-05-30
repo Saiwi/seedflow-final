@@ -65,3 +65,15 @@ button {
 i {
     font-size: 24px;
 }
+
+.preloader {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: url('images/preloader.gif') center center no-repeat;
+    background-size: contain;
+}
+
+.preloader.hidden {
+    display: none;
+}

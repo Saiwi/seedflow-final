@@ -12,8 +12,5 @@ export const useProductsStore = defineStore('products', {
             this.products = await ProductsService.fetch();
             this.loading = false;
         },
-        async fetchProducts({ catalogId, categoryId, filters, sortBy }) {
-            return [];
-        }
     },
 });

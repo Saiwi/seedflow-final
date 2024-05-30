@@ -1,5 +1,11 @@
 <template>
-    <div class="price-selector-wrapper">
+    <div
+        class="price-selector-wrapper"
+        :style="{
+            opacity: disabled ? '0' : '1',
+            pointerEvents: disabled ? 'none' : 'all',
+        }"
+    >
         <button class="decrease" @click="decrease">-</button>
         <input
             type="number"
@@ -14,6 +20,8 @@
 <script lang="js" setup>
 import { defineModel } from 'vue';
 
+const props = defineProps(['disabled']);
+
 const inputValue = defineModel(1);
 const onInput = (event) => {
     if (event.target.value <= 1) {
@@ -24,9 +32,15 @@ const onInput = (event) => {
     inputValue.value = event.target.value;
 };
 const increase = () => {
+    if (props.disabled) {
+        return false
+    }
     inputValue.value++;
 };
 const decrease = () => {
+    if (props.disabled) {
+        return false
+    }
     if (inputValue.value <= 1) {
         return false;
     }

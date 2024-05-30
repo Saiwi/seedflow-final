@@ -9,6 +9,7 @@ export const useProfileStore = defineStore('profile', {
     actions: {
         async loadProfile(uid) {
             this.profile = await ProfileService.loadProfile(uid);
+            return this.profile.id;
         }
     },
 });

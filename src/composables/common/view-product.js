@@ -27,9 +27,12 @@ export default function useViewProduct({ catalogId } = {}) {
     const closeProductView = () => {
         openedState.value = false;
         loading.value = true;
+        currentId.value = null;
     };
 
     const currentData = computed(() => products.products.find((product) => product.id == currentId.value) ?? {});
+
+    window.catalogsGlobal[catalogId] = openProductView;
 
     return {
         loading,
