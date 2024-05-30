@@ -51,6 +51,7 @@ const tryMakeOrder = async () => {
         ...formData,
         profile: { ...profileStore.profile },
         products: [...cart.items],
+        clientName: auth.currentUser.displayName,
     });
     if (result) {
         orderDone.value = true;

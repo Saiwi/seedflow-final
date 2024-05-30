@@ -46,7 +46,7 @@ export default class OrderService {
             return { success: false, error: error.message };
         }
     }
-    static async makeOrder({ city, post, postNumber, products, profile }) {
+    static async makeOrder({ city, post, postNumber, products, profile, clientName }) {
         const db = window.db; // Передбачається, що Firestore ініціалізовано в window.db
 
         const orderData = {
@@ -55,6 +55,8 @@ export default class OrderService {
             total: products.reduce((total, product) => total + product.price * product.quantity, 0),
             complete: false,
             city: city,
+            clientName,
+            clientPhone: profile.phone,
             department: postNumber,
             post: post
         };
