@@ -4,7 +4,10 @@
             <img class="preloader" :data-src="product.image" />
         </div>
         <div class="info-section">
-            <h4 @click="$emit('view-product', product.id)">
+            <h4
+                class="text-align-center"
+                @click="$emit('view-product', product.id)"
+            >
                 {{ product.name }}
             </h4>
             <div class="buy-row">

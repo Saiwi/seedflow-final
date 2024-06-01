@@ -1,18 +1,20 @@
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export default class ProfileManager {
   constructor() {
     this.db = window.db;
   }
 
-  async addProfile(phone, userId) {
+  async addProfile(phone, userId, name) {
     try {
-      const docRef = await addDoc(collection(this.db, "profiles"), {
+      await setDoc(doc(this.db, "profiles", userId), {
         phone: phone,
         userId: userId,
+        name,
       });
-      return docRef.id;
+      return userId;
     } catch (error) {
+      console.error("Error creating profile: ", error);
       return null;
     }
   }

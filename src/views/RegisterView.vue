@@ -195,7 +195,11 @@ export default {
                         .then(() => {
                             const manager = new ProfileManager();
                             manager
-                                .addProfile(this.phone, user.uid)
+                                .addProfile(
+                                    this.phone,
+                                    user.uid,
+                                    `${this.name} ${this.surname}`
+                                )
                                 .then(() => {
                                     this.$router.push("/");
                                 });

@@ -49,6 +49,13 @@
                     @remove-from-cart="onRemoveFromCart"
                 ></ProductCell>
 
+                <h3
+                    v-if="!filteredProducts.length"
+                    style="padding: 20px; margin: 0"
+                >
+                    Нічого не знайдено
+                </h3>
+
                 <div class="more-divider"></div>
             </div>
         </div>

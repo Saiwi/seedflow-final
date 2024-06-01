@@ -77,3 +77,7 @@ i {
 .preloader.hidden {
     display: none;
 }
+
+.text-align-center {
+    text-align: center;
+}

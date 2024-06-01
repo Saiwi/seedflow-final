@@ -61,12 +61,6 @@ export default class CommentsService {
 
         // Перевірити, чи існує коментар для цього profileId
         const commentsRef = collection(window.db, 'comments');
-        const commentQuery = query(commentsRef, where('profileId', '==', profileId));
-        const commentSnapshot = await getDocs(commentQuery);
-
-        if (!commentSnapshot.empty) {
-            return { result: false };
-        }
 
         const newMessage = {
             message: message.message,

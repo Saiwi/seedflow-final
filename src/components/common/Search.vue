@@ -49,7 +49,7 @@ const openFoundProduct = (product) => {
             placeholder="Пошук товарів"
             @input="onInput"
         />
-        <Transition>
+        <Transition name="fade">
             <div tabindex="1" v-if="modelValue" class="search-dropdown">
                 <a v-if="processing" href="javascript:void(0)">Пошук...</a>
                 <a v-else-if="!foundResult.length" href="javascript:void(0)"
@@ -107,16 +107,5 @@ const openFoundProduct = (product) => {
 }
 [data-in-stock="false"] {
     color: red;
-}
-
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
 }
 </style>

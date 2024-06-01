@@ -203,11 +203,13 @@
     input:focus + .search-dropdown,
     .search-dropdown:focus-within {
         pointer-events: all;
+        transition: opacity 0.3s;
         opacity: 1;
     }
     .search-dropdown {
         pointer-events: none;
         opacity: 0;
+        transition: opacity 0.3s;
 
         position: absolute;
         top: 100%;

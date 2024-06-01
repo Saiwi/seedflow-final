@@ -86,18 +86,7 @@ onAuthStateChanged(auth, (user) => {
             </Message>
         </div>
         <div v-else class="message">Поки що немає відгуків</div>
-        <div v-if="currentUserComment" style="flex-grow: 1">
-            <h3>Дякуємо, ваш відгук опубліковано 😊</h3>
-            <div style="margin-top: 24px"></div>
-            <Message
-                :name="currentUserComment.author"
-                :date="currentUserComment.date"
-                :rating="currentUserComment.rating"
-            >
-                {{ currentUserComment.message }}
-            </Message>
-        </div>
-        <form class="form" v-else-if="allowToWriteComment">
+        <form class="form" v-if="allowToWriteComment">
             <h4>Нам також цікава Ваша думка про наші товари</h4>
             <small>* За відгук даруємо знижку 5 % на наступне замовлення</small>
             <div class="inputs">

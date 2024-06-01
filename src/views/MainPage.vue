@@ -53,10 +53,18 @@
             title="Овочева галерея"
             subtitle="Фото плодів вирощених нашими покупцями з насіння Seedflow"
             :slides="[
-                { id: 1, url: '1.png' },
-                { id: 2, url: '2.png' },
-                { id: 3, url: '3.png' },
-                { id: 4, url: '4.png' },
+                { id: 1, url: '1.png', text: '1' },
+                { id: 2, url: '2.png', text: '2' },
+                { id: 3, url: '3.png', text: '3' },
+                { id: 4, url: '4.png', text: '4' },
+                { id: 5, url: '5.png', text: '5' },
+                { id: 6, url: '6.png', text: '6' },
+                { id: 7, url: '7.png', text: '7' },
+                { id: 8, url: '8.png', text: '8' },
+                { id: 9, url: '9.png', text: '9' },
+                { id: 10, url: '10.png', text: '10' },
+                { id: 11, url: '11.png', text: '11' },
+                { id: 12, url: '12.png', text: '12' },
             ]"
         />
 

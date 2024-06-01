@@ -30,7 +30,9 @@ function getImgUrl(pic) {
     >
         <Slide v-for="slide in slides" :key="slide.id">
             <div class="carousel__item">
-                <img :src="getImgUrl(slide.url)" alt="Slide" />
+                <div class="slide-content" :data-content="slide.text">
+                    <img :src="getImgUrl(slide.url)" alt="Slide" />
+                </div>
             </div>
         </Slide>
         <template #addons>
