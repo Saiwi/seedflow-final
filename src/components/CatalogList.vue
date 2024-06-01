@@ -41,7 +41,7 @@
                 ></ProductView>
 
                 <ProductCell
-                    v-for="product of filteredProducts"
+                    v-for="product of paginatedProducts"
                     :key="product.id"
                     :product="product"
                     @view-product="openProductView($event)"
@@ -62,10 +62,10 @@
         <div class="products more"></div>
         <div class="d-flex justify-content-end w-100 mt-28">
             <ButtonOutline
-                v-if="!loading && !pagination.isAll"
+                v-if="!loading && !isAll"
                 text="Переглянути більше"
                 icon="arrow-right-up-line"
-                @click="pagination.showMore"
+                @click="showMore"
             ></ButtonOutline>
         </div>
     </div>
@@ -174,8 +174,8 @@ const filteredProducts = computed(() => {
     return filtered;
 });
 
-const pagination = useProductsPagination(filteredProducts.value);
-const paginatedProducts = computed(() => pagination.paginatedProducts);
+const { paginatedProducts, showMore, isAll } =
+    useProductsPagination(filteredProducts);
 
 watchEffect(() => {
     for (let filter of props.filters) {

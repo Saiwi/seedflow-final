@@ -1,27 +1,24 @@
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, toValue } from 'vue';
 
 export function useProductsPagination(products) {
     const itemsPerPage = 3;
-    const currentPage = ref(0);
-    const isAll = ref(false);
+    const currentPage = ref(1);
 
     const paginatedProducts = computed(() => {
-        const start = currentPage.value * itemsPerPage;
-        const end = start + itemsPerPage;
-        return products.slice(0, end);
+        const end = currentPage.value * itemsPerPage;
+        return toValue(products).slice(0, end);
     });
 
-    watch(products, () => {
-        currentPage.value = 0;
-        isAll.value = false;
-    });
+    const isAll = computed(() => paginatedProducts.value.length >= toValue(products).length);
 
     function showMore() {
         currentPage.value++;
-        if (paginatedProducts.value.length >= products.length) {
-            isAll.value = true;
-        }
     }
+
+    // Спостерігаємо за змінами в products і скидаємо currentPage
+    watch(products, () => {
+        currentPage.value = 1;
+    });
 
     return {
         paginatedProducts,
