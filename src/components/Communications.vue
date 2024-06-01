@@ -15,6 +15,8 @@ const message = ref("");
 const profileName = ref("");
 const allowToWriteComment = ref(null);
 
+const commentsStore = useComments();
+
 const currentUserComment = computed(() => commentsStore.myComment);
 const comments = computed(() => commentsStore.comments);
 
@@ -24,7 +26,6 @@ const commentError = ref("");
 const router = useRouter();
 const auth = getAuth();
 
-const commentsStore = useComments();
 const scroll = useScrollTo();
 
 const writeMessage = async () => {
@@ -62,12 +63,12 @@ onAuthStateChanged(auth, (user) => {
         profileName.value = user.displayName;
         scroll.scrollToSection();
 
-        commentsStore.fetchMessages();
-
         allowToWriteComment.value = true;
     } else {
         allowToWriteComment.value = false;
     }
+
+    commentsStore.fetchMessages();
 });
 </script>
 

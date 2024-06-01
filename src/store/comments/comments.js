@@ -10,7 +10,6 @@ export const useComments = defineStore('comments', {
     getters: {},
     actions: {
         async fetchMessages() {
-            this.myComment = await commentsService.getMyComment() ?? null;
             this.comments = await commentsService.fetchComments() ?? [];
         },
         async writeMessage({ message, rating }) {
